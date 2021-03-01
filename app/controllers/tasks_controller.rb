@@ -5,6 +5,7 @@ class TasksController < ApplicationController
   end
 
   def show
+    @task = Task.find(params[:id])
   end
 
   def new
@@ -14,15 +15,17 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     @task.save
-    redirect_to tasks_path
+    redirect_to task_path(@task)
   end
 
   def edit
+    @task = Task.find(params[:id])
   end
 
   def update
-    @task.update(task_params)
-    redirect_to task_path(@task)
+     @task = Task.find(params[:id])
+     @task.update(task_params)
+     redirect_to task_path(@task)
   end
 
   def destroy
